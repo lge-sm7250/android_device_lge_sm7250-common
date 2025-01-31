@@ -183,6 +183,11 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
 
+# Properties
+TARGET_ODM_PROP += $(LOCAL_PATH)/odm.prop
+TARGET_SYSTEM_EXT_PROP += $(LOCAL_PATH)/system_ext.prop
+TARGET_VENDOR_PROP += $(LOCAL_PATH)/vendor.prop
+
 # Public libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
