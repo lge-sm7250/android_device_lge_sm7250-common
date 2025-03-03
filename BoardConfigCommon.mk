@@ -9,8 +9,12 @@ COMMON_PATH := device/lge/sm7250-common
 # A/B
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS += \
-    system \
+    boot \
+    dtbo \
     product \
+    recovery \
+    system \
+    vbmeta \
     vendor
 
 # Architecture
@@ -73,6 +77,7 @@ BOARD_KERNEL_CMDLINE := \
 	ehci-hcd.park=3 lpm_levels.sleep_disabled=1 service_locator.enable=1 \
 	swiotlb=2048 androidboot.configfs=true loop.max_part=7 \
 	androidboot.usbcontroller=a600000.dwc3
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DTBO := true
@@ -116,6 +121,7 @@ TARGET_SYSTEM_EXT_PROP += $(COMMON_PATH)/system_ext.prop
 TARGET_VENDOR_PROP += $(COMMON_PATH)/vendor.prop
 
 # Recovery
+BOOTLOADER_MESSAGE_OFFSET := 128
 BOARD_INCLUDE_RECOVERY_DTBO := true
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.hardware
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
@@ -137,10 +143,6 @@ SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/private
 # Verified Boot
 BOARD_AVB_ENABLE := true
 BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
-BOARD_AVB_RECOVERY_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
-BOARD_AVB_RECOVERY_ALGORITHM := SHA256_RSA4096
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX := 1
-BOARD_AVB_RECOVERY_ROLLBACK_INDEX_LOCATION := 1
 
 # Wifi
 BOARD_WLAN_DEVICE := qcwcn
